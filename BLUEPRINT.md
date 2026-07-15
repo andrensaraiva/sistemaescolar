@@ -1,5 +1,21 @@
 # Celeste Academy — Blueprint da Reescrita (v2)
 
+> ## ⚠️ Superado em partes (15/jul/2026)
+>
+> A **arquitetura** deste doc (stack, modelo de dados, RLS, princípios) continua válida
+> e é a fonte da verdade. O **produto** foi redefinido depois dele — onde houver
+> conflito, **[SISTEMAS.md](SISTEMAS.md) e os PERFIL-*.md ganham**.
+>
+> | Aqui está escrito | Vale hoje |
+> |---|---|
+> | "professor da turma" (singular) | **4+ turmas, 100+ alunos** |
+> | Tese: registre → gere o documento | **Registre → veja quem está afundando**; o documento é subproduto ([CLAUDE.md §1](CLAUDE.md)) |
+> | §9 — ordem de construção | Substituída por [SISTEMAS.md](SISTEMAS.md) § *Ordem de construção* |
+> | 8 tipos de atividade (§2, §5, §9) | **6** — duelo X1 e chat com NPC **cortados** ([SISTEMAS.md §17](SISTEMAS.md)) |
+> | `duels` / `duel_ratings` no modelo (§5) | Não existem mais |
+> | Instrutor com "chrome de editor" (§7) | **Sem chrome** — skin Dev é paleta + disciplina ([CLAUDE.md §3](CLAUDE.md)) |
+> | Plano de ensino escrito pelo professor (§5) | O autor **não escreve plano** — ele se materializa ([SISTEMAS.md §3](SISTEMAS.md)) |
+>
 > Documento-fonte para **reconstruir a plataforma do zero**, com a fundação certa.
 > Substitui a diretriz "não reescrever" do `CLAUDE.md` — a decisão (14/jul/2026) é
 > **reescrever**, usando o sistema antigo (`SistemaProgramacaoJogos`) **apenas como
