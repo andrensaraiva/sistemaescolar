@@ -1,14 +1,22 @@
 # Protótipos de design — Celeste Academy
 
-## Atual
+## Atual — ⭐ a referência viva do design (aprovados 15/jul/2026)
 
-- **`celeste-atividade.html`** — ⭐ **a referência viva do design** (aprovada 15/jul/2026).
-  A tela de atividade de pseudocódigo nas **4 variantes** (Caderno claro/escuro, Dev
-  claro/escuro), com o loop assíncrono inteiro: escrever → entregar → a correção
-  voltando como caneta vermelha na página. Auto-contido (Schibsted Grotesk, Caveat e
-  JetBrains Mono em base64): basta abrir no navegador.
-  Controles: **Aluno/Professor** × **Claro/Escuro** no topo; botão **Entregar** roda o loop.
-  Especificado em [DESIGN.md](../DESIGN.md) — em caso de dúvida, **este arquivo manda**.
+Auto-contidos (Schibsted Grotesk, Caveat e JetBrains Mono em base64): basta abrir no
+navegador. Especificados em [DESIGN.md](../DESIGN.md) — em caso de dúvida, **estes
+arquivos mandam**.
+
+- **`celeste-atividade.html`** — a tela de atividade de pseudocódigo nas **4 variantes**
+  (Caderno claro/escuro, Dev claro/escuro), com o loop assíncrono inteiro: escrever →
+  entregar → a correção voltando como caneta vermelha na página.
+  Controles: **Aluno/Professor** × **Claro/Escuro** no topo; **Entregar** roda o loop.
+  Prova a regra da pauta (o `line-height` do editor é o passo da régua).
+
+- **`celeste-fila-correcao.html`** — a fila do instrutor, Dev claro/escuro.
+  **O teclado funciona de verdade: J, K e Enter.** Prova que a skin Dev tem
+  personalidade sem chrome. As três entregas são argumentos: a Yanka (a IA não sabe
+  opinar porque ela foi melhor que o gabarito), o Renato (evidência de cola, nunca
+  veredito) e o Adryan (entrega pela metade, cruzando com o radar).
 
 ## Histórico
 

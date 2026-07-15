@@ -4,15 +4,13 @@
 > **não são repetidas aqui**. Este doc é o *como*: tokens, tipografia, pauta, movimento.
 > **Escrito depois do protótipo, não antes** — tudo aqui foi visto antes de ser escrito.
 
-**Protótipo de referência (aprovado 15/jul/2026):**
-[prototipos/celeste-atividade.html](prototipos/celeste-atividade.html) — auto-contido
-(fontes em base64), basta abrir no navegador. Hospedado em
-https://claude.ai/code/artifact/e361eb92-e48f-444b-8835-06ce5dec1aeb
+**Protótipos de referência — aprovados 15/jul/2026. Em caso de dúvida, eles mandam,
+não este texto.** Auto-contidos (fontes em base64): basta abrir no navegador.
 
-A tela de atividade de pseudocódigo nas 4 variantes, com o loop assíncrono inteiro
-(escrever → entregar → a correção voltando como caneta vermelha na página). **Este
-arquivo é a implementação de referência dos tokens abaixo** — em caso de dúvida, ele
-manda.
+| Protótipo | Prova | Link |
+|---|---|---|
+| [prototipos/celeste-atividade.html](prototipos/celeste-atividade.html) | A tela de atividade nas **4 variantes** + o loop assíncrono (escrever → entregar → caneta vermelha voltando na página). A regra da pauta (§3). | [ver](https://claude.ai/code/artifact/e361eb92-e48f-444b-8835-06ce5dec1aeb) |
+| [prototipos/celeste-fila-correcao.html](prototipos/celeste-fila-correcao.html) | A fila do instrutor, Dev claro/escuro. **O teclado funciona de verdade** (J/K/Enter). A skin Dev sem chrome tem personalidade — a disciplina bastou. | [ver](https://claude.ai/code/artifact/5d3d8b65-e601-458b-a86b-abc8e8a3c6e9) |
 
 > O protótipo antigo ([prototipos/celeste-6-estilos.html](prototipos/celeste-6-estilos.html),
 > 9 estilos × 2 dashboards) continua útil como **paleta de referência dos estilos não
@@ -106,7 +104,11 @@ melhor do que texto ilegível. A skin não é uma fonte; é um sistema.
 
 ### Mono com propósito — a disciplina que segura a skin Dev
 Como a skin Dev **não tem chrome** (sem abas, sem árvore — decidido), a personalidade
-dela vem de disciplina. Ela só existe se for cumprida sem exceção:
+dela vem de disciplina. **Testado e aprovado na fila de correção** — a tela mais dura
+possível, uma ferramenta densa sem nada em que se apoiar. A disciplina bastou; "sem
+chrome" está confirmado.
+
+Ela só existe se for cumprida sem exceção:
 
 1. **Mono só onde número alinha** — nota, %, hora, contagem, XP, ID, e o código.
    **Nunca** em nome de aluno, título, enunciado, feedback.
@@ -240,8 +242,8 @@ Mais: piso de 12px · tudo que clica é `<button>` · `aria-live` no toast e no 
   documento" foi desenhado pensando nele. Fazer junto com o diário XLSX.
 - **Os tokens de movimento como CSS vars** — o protótipo tem os valores certos, mas
   hard-coded nas animações. Extrair para `--mov-*` no kit de UI.
-- As 4 telas restantes que nunca existiram: fila de correção (o teste mais duro da skin
-  Dev), chamada, jornada da UC, "Hoje" do aluno no celular (o único mobile-first).
+- As 3 telas restantes que nunca existiram: **chamada**, **jornada da UC**, **"Hoje" do
+  aluno no celular** (o único mobile-first — e por isso o teste que falta pro Caderno).
 - Skeletons na skin (nunca spinner genérico).
 - Loja de temas: os estilos não escolhidos do protótipo antigo viram itens
   ([BLUEPRINT.md §7](BLUEPRINT.md)) — cosmético puro.

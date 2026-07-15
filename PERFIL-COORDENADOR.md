@@ -152,11 +152,42 @@ você** — e por isso é o único que você não pode abandonar pela metade.
 
 ---
 
-## 7. Pendências deste perfil
+## 7. Inventário de funcionalidades
 
-- **Admin**: ficou sem resposta. Presumo `is_master_admin` = você, e "admin" = umas
-  telas de configuração dentro do seu perfil, não uma área própria. **Confirmar.**
+Varredura completa (15/jul/2026).
+
+### Tem
+| Funcionalidade | Nota |
+|---|---|
+| **Radar agregado** por turma e UC | §3. Reaproveita o do instrutor; só muda a granularidade. |
+| **Dossiê do aluno** — a linha do tempo | O mesmo do instrutor ([PERFIL-INSTRUTOR.md §12.2](PERFIL-INSTRUTOR.md)). Zero tela nova. |
+| **Abrir ocorrência** | ✅ Ele supervisiona de verdade e responde pela escola. Toda ocorrência tem **autor**, então fica claro quem escreveu o quê. |
+| **Substituição** — designar com prazo, quebra-vidro | §4 |
+| **Relatórios institucionais** | Segundo cliente dos geradores da Papelada Zero. |
+| **Pesquisas de UC** | ✅ **Real — o SENAI cobra.** Aplica a pesquisa, o relatório sai pronto. [SISTEMAS.md §10.1](SISTEMAS.md) |
+| **Salas, ocupação, calendário** | Mantido contra recomendação. §6 |
+| **Visão nominal** em tudo | Ele já tem controle dos alunos por fora. §1 |
+
+**Repare quanto é reaproveitamento:** radar, dossiê e ocorrências já existem para o
+instrutor. Este perfil é caro em **RLS e governança**, não em telas — o que é uma boa
+notícia, e a razão de ele caber.
+
+### Não tem — por decisão
+| | Por quê |
+|---|---|
+| **Corrigir, dar aula, fazer chamada** | Se precisa disso, ele vira instrutor daquela turma. Não ganha botão. §2 |
+| **Gamificação** | Fora da área gamificada. |
+| **Radar por professor** | A lei mais importante deste doc. §3 |
+| **Trocar de skin** | Dev, sempre. |
+
+## 8. Pendências deste perfil
+
 - Quantos coordenadores existem? Um só, ou um por curso?
 - O coordenador pode designar a si mesmo como substituto?
 - Prazo padrão do quebra-vidro (a aula? o dia?).
 - Relatórios: quais, exatamente? (a lista sai da Papelada Zero, não daqui)
+- **Pesquisas de UC**: anonimato é o ponto todo — mas o sistema sabe quem respondeu.
+  Precisa ser anônimo **na leitura**, não na coleta. E o formulário é fixo do SENAI ou
+  ele monta?
+
+> **Admin resolvido:** é área separada, com sessão própria. Ver [PERFIL-ADMIN.md](PERFIL-ADMIN.md).

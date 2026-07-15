@@ -64,10 +64,46 @@ Toda outra tela do projeto é otimizada para **velocidade**. Esta é otimizada
 
 ---
 
-## 5. Pendências
+## 5. A troca de chapéu — sessão separada
 
-- Como você troca de chapéu? (menu? URL separada? sessão distinta?) — precisa ser
-  explícito o bastante para você **saber** que está no admin.
-- Importação do PPC por IA: o fluxo de revisão antes de gravar (é currículo inteiro,
-  gerado por IA, e vira a base de tudo).
+✅ **Decidido: sessão própria. Você loga de novo pra entrar no admin.**
+
+Parece exagero — é você dos dois lados, então não é segurança contra ninguém. **E é
+exatamente esse o ponto.** Não é segurança: é **cerimônia**. Logar de novo é o ritual que
+te faz *saber* que trocou de chapéu, e isso é a tese deste perfil inteiro (§2): a fricção
+aqui **é** a feature.
+
+Um item de menu deixaria o corte de nota a um clique de distância enquanto você corrige
+100 entregas às onze da noite. É assim que se reprova 14 alunos sem querer.
+
+---
+
+## 6. Inventário de funcionalidades
+
+### Tem
+| Funcionalidade | Nota |
+|---|---|
+| **Criar professor, criar coordenador** | Hierárquico. Sem cadastro aberto, nunca. |
+| **Currículo**: curso → módulos → UCs | **Multi-curso de verdade** — Jogos e Desenvolvimento de Sistemas, e virão outros. |
+| **Importar PPC por IA** | O coração do sistema de currículo. Maior alavanca e maior risco. |
+| **Config institucional** | Cortes (70%/75%), menções PPS/PPM/PPI. **A config mais perigosa do sistema.** |
+| **Feriados, calendário do curso** | Afeta chamada e diário. |
+| **Stats da instância** | Você é o dev — isto é observabilidade, não vaidade. |
+| **Sessão separada** | §5 |
+
+### Não tem — por decisão
+| | Por quê |
+|---|---|
+| **Dar aula, corrigir, chamada, radar** | Troca de chapéu. §4 |
+| **Curar o banco de exercícios** | Sem curadoria, por decisão — ninguém aprova nada, ninguém vira juiz do trabalho de colega. [SISTEMAS.md §6](SISTEMAS.md) |
+| **Coordenador acumulando admin** | Quem supervisiona não cria professor nem mexe em corte de nota. §1 |
+| **Gamificação** | Óbvio. |
+
+## 7. Pendências
+
+- Importação do PPC por IA: **o fluxo de revisão antes de gravar** — é currículo inteiro,
+  gerado por IA, virando a base de tudo. É a tela que mais importa deste perfil, e a
+  Lei §2.2 (mostrar o estrago antes) se aplica com força máxima.
 - Config institucional é global ou por curso?
+- O que acontece quando o SENAI revisa um PPC e o currículo precisa mudar **com turmas em
+  andamento**? O caso difícil, ainda sem resposta.

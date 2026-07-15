@@ -54,6 +54,19 @@ Em dúvida sobre qualquer decisão de produto, pergunte: *isto está fazendo a m
 julgar uma pessoa?* Se estiver, está errado. Vale em dobro porque os alunos são
 **menores de idade** — a máquina não tem autoridade moral sobre eles, e você tem.
 
+### Lei 1 — a que decide se a plataforma dá ou tira tempo
+
+> **Nada começa em branco.**
+
+A tela em branco é o inimigo de um professor solo com 4 turmas. Toda criação parte de
+algo: o plano **clona** do semestre passado · o exercício **clona** do banco (comum a
+todos os docentes) · o Planejamento de UC a **IA rascunha** · o briefing do substituto
+vem do **rastro** · a nota a **IA sugere** · o dossiê do aluno é **projeção** dos
+sensores.
+
+Se uma tela de criação abre vazia e espera que você escreva, ela está cobrando trabalho
+em vez de devolver. Reveja.
+
 ### Produto
 1. **Desktop produz; celular consulta e recebe.** Vale para aluno **e** instrutor.
    Exercício de código não precisa funcionar no celular — assumido, não lamentado.
@@ -128,8 +141,10 @@ código). "Aurora Minimal" (roxo) **aposentado**.
 **Os tokens completos das 4 variantes, a tipografia, a regra da pauta e o movimento
 estão em [DESIGN.md](DESIGN.md)** — escrito depois do protótipo, com tudo já visto.
 
-**Protótipo aprovado (15/jul/2026):** https://claude.ai/code/artifact/e361eb92-e48f-444b-8835-06ce5dec1aeb
-— a tela de atividade nas 4 variantes.
+**Protótipos aprovados (15/jul/2026)** — [atividade nas 4 variantes](https://claude.ai/code/artifact/e361eb92-e48f-444b-8835-06ce5dec1aeb)
+· [fila de correção](https://claude.ai/code/artifact/5d3d8b65-e601-458b-a86b-abc8e8a3c6e9).
+Fontes em [prototipos/](prototipos/). A skin Dev **sem chrome** foi testada na fila (a
+tela mais dura possível) e aprovada: a disciplina bastou.
 
 O protótipo antigo ([prototipos/celeste-6-estilos.html](prototipos/celeste-6-estilos.html),
 9 estilos × 2 dashboards) serve hoje só como paleta dos estilos **não** escolhidos, para
@@ -141,7 +156,7 @@ a loja de temas. Para o resto está superado — ver [ANALISE-UX.md](ANALISE-UX.
 
 | Doc | O que tem |
 |---|---|
-| **[SISTEMAS.md](SISTEMAS.md)** | **O mapa do produto completo.** Os 16 sistemas, o que cada um faz, status e ordem de construção. Comece por aqui. |
+| **[SISTEMAS.md](SISTEMAS.md)** | **O mapa do produto completo.** Todos os sistemas, o que cada um faz, status, o que foi cortado e a ordem de construção. Comece por aqui. |
 | [BLUEPRINT.md](BLUEPRINT.md) | Arquitetura, stack, modelo de dados, RLS. ⚠️ O §9 (ordem de construção) foi invertido pela dor central — vale o de [SISTEMAS.md](SISTEMAS.md). |
 | [ANALISE-UX.md](ANALISE-UX.md) | Auditoria crítica que originou as decisões de 15/jul. Leia antes de mexer em design. |
 | [PERFIL-ALUNO.md](PERFIL-ALUNO.md) | Home "Hoje", os dois eixos, tentativas por tipo, liga/streak/céu, estados vazios. |
@@ -165,15 +180,20 @@ do curso (para importação de currículo por IA).
 
 ## 5. Estado — o que ainda está aberto
 
-**Perfis:** os quatro definidos (15/jul/2026) — aluno, instrutor, coordenador, admin.
+**Perfis:** os quatro definidos e **inventariados** (15/jul/2026) — cada PERFIL-*.md tem
+a lista completa do que **tem**, do que **não tem por decisão** (não por falta de tempo)
+e do que está aberto.
 
-**Sistemas:** mapeados em [SISTEMAS.md](SISTEMAS.md) com status por sistema. Nenhum tem
-doc próprio ainda; o mapa já traz o que está decidido. Os menos definidos são
-**currículo**, **plano de ensino** (o editor) e **notificações**. O maior buraco de
-produto é **a tela de atividade**; o maior risco técnico é o **rate limit do Piston
-público** com 100+ alunos rodando na mesma aula.
+**Sistemas:** mapeados em [SISTEMAS.md](SISTEMAS.md) com status por sistema. Os menos
+definidos são **currículo** (o fluxo de revisão do import de PPC) e **notificações**.
 
-**Design:** as 4 variantes existem, foram testadas numa tela real e estão aprovadas
-([DESIGN.md](DESIGN.md)). A **tela de atividade** — o maior buraco do produto — está
-desenhada. Faltam: fila de correção (o teste mais duro da skin Dev), chamada, jornada
-da UC, "Hoje" do aluno no celular, `@media print`.
+**O maior risco técnico** segue sendo o **rate limit do Piston público** com 100+ alunos
+rodando na mesma aula — mas ele **saiu da Fase 1**: pseudocódigo declara `runner: none` e
+prova o motor inteiro sem encostar nele. O risco é por linguagem, não do sistema, e só
+volta na UC de Jogos (C#).
+
+**Design:** as 4 variantes existem, foram testadas em duas telas reais e estão aprovadas
+([DESIGN.md](DESIGN.md)). Feitas: **atividade** (o maior buraco do produto) e **fila de
+correção** (a maior alavanca de tempo). Faltam: **chamada**, **jornada da UC**, **"Hoje"
+do aluno no celular** (o único mobile-first, e o teste que falta pro Caderno) e
+`@media print`.

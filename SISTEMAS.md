@@ -183,6 +183,26 @@ SAEP (quiz) · SAP (rubrica).
 > **`pseudocódigo/lógica` é o tipo nº 1 a construir** — ele declara `runner: none`,
 > exercita o motor inteiro e não encosta no maior risco técnico do projeto. Ver §14.
 
+### O banco de exercícios — comum, voluntário, sem curadoria
+✅ **Comum a TODOS os docentes, não só do curso.** Não é generosidade, é estrutura:
+*Lógica de Programação existe em Jogos Digitais **e** em Desenvolvimento de Sistemas*.
+As UCs se repetem entre cursos — um banco que parasse na fronteira do curso estaria
+errado por construção.
+
+✅ **Voluntário e sem curadoria.** Cada docente cria o seu. Publicar no comum é opcional;
+se outro achar interessante, clona. **Ninguém aprova nada, ninguém é obrigado a nada.**
+Exercício ruim simplesmente não é clonado — e nenhum professor vira juiz do trabalho de
+outro, que é o mesmo veneno que fez a gente proibir o radar por professor (§9).
+
+✅ **Clonar é livre; editar o original é só do dono.** O clone é seu para sempre.
+
+**É a única alavanca concreta de adoção voluntária que apareceu:** o colega entra pra
+pegar exercício pronto e fica pelo resto. É dar antes de pedir.
+
+**Aberto:** banco comum vazio é banco morto — ele nasce com os exercícios do autor (que é
+o primeiro usuário), e cresce ou não. Sinal de uso ("clonado 14×") ordenaria sozinho, sem
+julgar ninguém — vale a pena?
+
 **Decidido:** ✅ nenhuma tela compara tipo por string — o registro decide ·
 ✅ **tentativas por tipo, declaradas no registro**: prática = **ilimitada** (errar é de
 graça e é como se aprende a programar), prova/boss = **uma**, lockdown ·
@@ -306,6 +326,25 @@ Jogos.pdf`, `Matriz_SAEP_*.xls`, `avaliações.pdf`, `Matriz vertical.pdf`). Pos
 de verdade quando atacarmos este sistema.
 
 **Depende de:** `@media print` e geração XLSX no free tier.
+
+---
+
+## 10.1 Pesquisas de UC 🟡 — *real, o SENAI cobra*
+**O que faz:** o aluno avalia a UC/o curso; o relatório institucional sai pronto.
+
+**Decidido:** ✅ **é obrigação institucional, não enfeite** — então é **Papelada Zero com
+coleta**: aplica a pesquisa, e o relatório é projeção das respostas. Mesmo padrão de tudo:
+o dado nasce uma vez.
+
+**Consequência que abre escopo:** é a **única coisa que o aluno faz que não é atividade
+nem consulta**. Cria uma tela nova no perfil dele (responder), e ela não pode parecer
+tarefa — não vale XP, não vale nota, não entra na trilha.
+
+**Aberto:** anonimato (é o ponto todo de uma pesquisa — mas o sistema sabe quem
+respondeu; precisa ser anônimo **na leitura**, não na coleta) · quando aplica (fim da UC?)
+· o formulário é fixo do SENAI ou você monta?
+
+**Depende de:** [PERFIL-COORDENADOR.md](PERFIL-COORDENADOR.md) — é tarefa dele.
 
 ---
 

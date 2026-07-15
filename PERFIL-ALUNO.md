@@ -230,10 +230,81 @@ Requisito, não polimento — alunos menores e inclusão. Herdado da auditoria:
 
 ---
 
-## 10. Pendências deste perfil
+## 10. Inventário de funcionalidades
+
+Varredura completa (15/jul/2026). O que existe, o que **não** existe por decisão, e o
+que ainda está em aberto.
+
+### Tem
+| Funcionalidade | Nota |
+|---|---|
+| **Hoje** — agenda transversal | A casa. §4.1 |
+| **Jornada da UC** — trilha nos blocos do plano | §4.2 |
+| **Player de atividade** — 6 tipos | §4.3. Desktop. |
+| **Meu céu** — perfil, conquistas, constelações | §4.4 |
+| **Loja de temas** | Cosmético puro, desbloqueio permanente. §4.5 |
+| **Dois eixos** — XP + nota, sempre juntos | Lei. §3 |
+| **Liga** — fases da lua, dentro da turma, ciclo semanal | §6.2 |
+| **Streak por aula** | §6.3 |
+| **Tentativas por tipo** — prática ilimitada, prova uma | §5 |
+| **Refazer pra treinar** | Ver abaixo ⚠️ |
+| **Pedir ajuda na atividade** | Ver abaixo ⚠️ |
+| **Material da aula, por link** | Ver abaixo ⚠️ |
+| **Frequência: só o total com a régua** | `91% · precisa de 75%`. Sem detalhe aula a aula — "por que 71%?" é conversa sua, não tela. |
+| **Notificação: só o dado, sem juízo** | A plataforma nunca diz a um adolescente que ele está mal. [SISTEMAS.md §11](SISTEMAS.md) |
+| **Código de convite + primeiro acesso** | Você escreve no quadro; a turma entra na 1ª aula. |
+| **Projeto em grupo: avaliação entre pares** | Cega, nunca pública, insumo e não resultado. [SISTEMAS.md §12](SISTEMAS.md) |
+| **Responder pesquisa de UC** | ⚠️ Ver abaixo. |
+
+> **⚠️ Responder pesquisa de UC** entrou tarde (o coordenador revelou que o SENAI cobra
+> isso). É a **única coisa que o aluno faz que não é atividade nem consulta** — e por isso
+> ela não pode parecer tarefa: **não vale XP, não vale nota, não entra na trilha, não
+> aparece em "Pra entregar"**. Se ela virar mais uma pendência na cara dele, a pesquisa
+> some e o dado apodrece. [SISTEMAS.md §10.1](SISTEMAS.md)
+
+### ⚠️ As três decididas em 15/jul, com suas consequências
+
+**Material da aula = link, não upload.** A Celeste **referencia** o material onde ele já
+está (Drive/OneDrive); não hospeda. Zero trabalho novo pra você, e salva o 1GB do
+Supabase free — slide come isso numa semana.
+*Cuidado:* o Storage **continua existindo** — entrega de pixel art é arquivo. A distinção
+é **material (link)** vs **entrega (arquivo)**.
+
+**Pedir ajuda é campo da entrega, não canal.** Não é chat: é um "travei aqui" amarrado a
+uma atividade, que chega **junto da entrega na sua fila**, com o contexto embutido. Não
+cria expectativa de resposta às 23h, e **é sinal pro radar** — um aluno travado e pedindo
+não está sumindo, está tentando. Isso é o oposto de silêncio.
+*Requisito:* a fila precisa marcar quem pediu ajuda.
+
+**Refazer é treino; a nota já foi.** O aluno refaz à vontade (a prática é ilimitada), mas
+a nota daquela entrega está lançada. Coerente com os dois eixos: XP é hábito, nota é
+competência. E você não recorrige ×100 — a fila continua esvaziando, que é o que ela foi
+desenhada pra fazer.
+*Requisito de honestidade:* **o botão tem que dizer que é treino** antes do aluno gastar
+meia hora achando que a nota vai subir. "Tentar de novo" sozinho é armadilha.
+
+### Não tem — por decisão, não por falta de tempo
+| | Por quê |
+|---|---|
+| **Chat com NPC (IA)** | Cortado. Era o único caminho IA→aluno. [SISTEMAS.md §17](SISTEMAS.md) |
+| **Duelo X1** | Cortado. A competição vive na liga. |
+| **Chat livre com o professor** | 100+ adolescentes com canal direto, sem horário, e conversa privada adulto/menor. |
+| **Frequência detalhada aula a aula** | Só o total com a régua. |
+| **Contestar frequência na plataforma** | Vira mais uma fila na sua vida. |
+| **Ranking público ordenado** | Lei: nenhum aluno é publicamente o último. |
+| **Upload de material** | É link. |
+
+## 11. Pendências deste perfil
 
 - Desenho das constelações do céu (§4.4).
 - Catálogo e preço dos temas da loja.
+- **Refazer dá XP?** O XP já foi no primeiro acerto e não decai por tentativa (§5). Então
+  refazer depois de corrigido provavelmente não vale XP — e aí a recompensa é entender,
+  o que é a coisa mais saudável do produto, mas precisa ser dito na tela. Decidir.
+- **Pedir ajuda sem entregar?** Hoje o pedido é campo da entrega. Mas um aluno travado
+  antes de entregar é exatamente quem você quer achar — e ele não tem como levantar a
+  mão. Vale um "travei" solto, que vira sinal do radar sem virar chat?
+- **Mural/feed** — por último, se um dia ([SISTEMAS.md §16](SISTEMAS.md)).
 
 **Cortados (15/jul):** **duelo X1** e **chat com NPC** — ver [SISTEMAS.md §17](SISTEMAS.md).
 Consequências para este perfil: a competição do aluno vive **inteira na liga** (§6.2),

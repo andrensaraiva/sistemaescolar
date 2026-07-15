@@ -238,8 +238,87 @@ O que te afeta diretamente:
 **Decidido e cortado:** modo aula/projetor não existe. Você dá aula com outra coisa;
 a Celeste é ferramenta de bastidor.
 
-## 12. Pendências deste perfil
+## 12. Inventário de funcionalidades
 
-- Limiar de "Caindo": o que conta como piora sem gritar à toa.
-- Ocorrências: entram no radar ou são só papelada?
+Varredura completa (15/jul/2026). Duas descobertas grandes estão em §12.1 e §12.2 — as
+duas eram buracos que nenhum doc tinha visto.
+
+### Tem
+| Funcionalidade | Nota |
+|---|---|
+| **Cockpit "Hoje"** — por ação, nunca por KPI | §6 |
+| **As 2 listas de atenção** | §6.1 |
+| **Fila de correção** — teclado, IA sugere, sem "aceitar todas" | §5. Protótipo aprovado. |
+| **Chamada** — PC, começo da aula, atraso conta como presença | §7 |
+| **Papelada Zero** — diário XLSX, Planejamento de UC, ocorrências, menções | [SISTEMAS.md §10](SISTEMAS.md) |
+| **Criar atividade** — banco → IA → do zero | §12.1 |
+| **Banco de exercícios** — comum a **todos os docentes** | §12.1 |
+| **Dossiê do aluno** — a linha do tempo | §12.2 |
+| **Ocorrências** — radar **e** papelada | Registrar uma ocorrência é sinal forte: alguém já se incomodou o bastante pra escrever. O dado nasce uma vez. |
+| **Substituição** — notificado sempre, briefing de rastro | §11 |
+| **Desktop produz / celular consulta** | §8 |
+
+### 12.1 Criar atividade — o editor, e a Lei 1
+**O motor promete "editor do professor + player do aluno". Só o player existia.**
+
+**Decidido: os três caminhos, com o banco na frente.**
+
+| Caminho | Quando |
+|---|---|
+| **Clonar do banco** | O padrão. Você quase nunca cria do zero. |
+| **IA gera o rascunho** | Quando não tem no banco. Uso voltado a adulto, mediado — dentro da Lei 0. |
+| **Do zero** | A saída, não a porta. |
+
+**Consequência dura: o editor nunca abre em branco** ([Lei 1](CLAUDE.md)). Ele abre com
+um clone ou um rascunho, e o trabalho é **editar**. Uma tela de criação vazia aqui seria
+a plataforma cobrando trabalho em vez de devolver.
+
+**O banco é comum a TODOS os docentes — não só do seu curso.** Isso não é generosidade,
+é estrutura: **Lógica de Programação existe em Jogos Digitais e em Desenvolvimento de
+Sistemas**. As UCs se repetem entre cursos, então um banco que parasse na fronteira do
+curso estaria errado por construção.
+
+E é a **única alavanca concreta de adoção voluntária** que apareceu: o colega entra pra
+pegar exercício pronto e fica pelo resto. É dar antes de pedir — e, ao contrário do radar
+por professor (proibido), não dedura ninguém.
+
+*Governança:* **clonar é livre; editar o original é só do dono.** O clone é seu para
+sempre; o original de quem o escreveu.
+
+### 12.2 O dossiê do aluno — o alvo do core
+O radar diz "Sumindo · Adryan S.". **Você clica. Antes desta varredura, não havia nada
+do outro lado** — a ação-alvo da feature principal do produto não existia.
+
+**Decidido: a linha do tempo dele** — entregas, faltas, notas, ocorrências, em ordem.
+Você bate o olho e entende a história: *"parou em 12/06, faltou 3 seguidas, entregou meia
+colisão com um 'travei aqui'"*.
+
+**Sai de graça:** é **projeção dos sensores**, que já existem. Nenhuma tabela nova, nenhum
+dado registrado duas vezes. Mesmo padrão do briefing do substituto e da Papelada Zero.
+
+É também o que torna o radar honesto: com 100+ alunos você **não** lembra do Adryan — e
+é exatamente por isso que o radar existe. Apontar um nome sem contar a história seria
+pedir que você agisse no escuro.
+
+### Não tem — por decisão
+| | Por quê |
+|---|---|
+| **Modo aula / projetor** | Você dá aula com outra coisa; a Celeste é bastidor. |
+| **Chamada no celular** | É no PC, começo da aula. |
+| **"Aceitar todas"** na correção | Nenhuma variante, nunca. |
+| **Radar por professor** | Mata a adoção voluntária dos colegas. [PERFIL-COORDENADOR.md §3](PERFIL-COORDENADOR.md) |
+| **Chat com aluno** | O aluno pede ajuda **dentro da atividade**; chega na fila com contexto. |
+| **Upload de material** | É link. [PERFIL-ALUNO.md §10](PERFIL-ALUNO.md) |
+
+## 13. Pendências deste perfil
+
+- **Limiares do radar**: quantos atrasos, quantas faltas, em quanto tempo. Nascem
+  ajustáveis; o 1º semestre calibra.
+- **Banco comum vazio é banco morto** — como ele nasce com conteúdo? (o seu, importado?)
+- **Qualidade do banco comum**: exercício ruim de colega aparece pra todo mundo. Tem
+  curadoria, ou clonar-e-consertar já resolve?
+- A fila precisa marcar **quem pediu ajuda** (o campo "travei aqui" da entrega) — o
+  protótipo ainda não mostra isso.
+- **Lançar nota sem atividade na plataforma** (prova em papel) — existe?
+- Modo prova/lockdown: como você ativa?
 - O que exatamente o celular mostra do radar (alerta push? só leitura?).
