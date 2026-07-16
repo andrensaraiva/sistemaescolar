@@ -1,0 +1,111 @@
+/* Tokens — fonte da verdade: DESIGN.md §1 (as 4 variantes) e §4 (movimento).
+   Skin por papel em [data-skin] no <html>; modo escuro pela classe .escuro no <html>.
+   Os valores aqui são cópia da tabela do DESIGN.md. Mudou lá? Muda aqui. */
+
+:root {
+	/* Escala tipográfica — DESIGN.md §2. Piso de 12px, sem exceção. */
+	--t12: 12px;
+	--t125: 12.5px;
+	--t13: 13px;
+	--t135: 13.5px;
+	--t14: 14px;
+	--t145: 14.5px;
+	--t15: 15px;
+	--t17: 17px;
+	--t21: 21px;
+	--t26: 26px;
+	--t38: 38px;
+	--t42: 42px;
+
+	--corpo: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif;
+	--mono: 'JetBrains Mono', ui-monospace, monospace;
+	--display: 'Caveat', var(--corpo);
+
+	/* O passo da pauta. É a grade do conteúdo, não textura — DESIGN.md §3. */
+	--passo: 28px;
+	--regua: 19px;
+
+	/* Movimento — DESIGN.md §4. Usar ESTES; não inventar curva por tela.
+	   Duração + curva juntas: servem em `transition:` e em `animation:`. */
+	--mov-grifo: 0.62s cubic-bezier(0.2, 0.75, 0.25, 1); /* tinta que espalha */
+	--mov-caneta: 0.45s cubic-bezier(0.2, 0.9, 0.3, 1); /* mão que pousa */
+	--mov-sobe: 0.4s cubic-bezier(0.2, 0.8, 0.3, 1); /* algo que chega */
+	--mov-voa: 0.55s cubic-bezier(0.2, 0.9, 0.3, 1); /* XP indo pro lugar */
+	--mov-barra: 0.9s cubic-bezier(0.25, 0.8, 0.3, 1); /* preenchimento */
+	--mov-troca: 0.35s ease; /* skin/modo */
+	--mov-toque: 0.13s ease; /* botão sob o dedo */
+}
+
+/* ---- Caderno claro — o padrão do aluno ---- */
+[data-skin='caderno'] {
+	--mesa: #e7e0ce;
+	--folha: #fdfbf2;
+	--tinta: #26374f;
+	--mut: #5b6a80;
+	--pauta: #bfd3e6;
+	--linha: #26374f;
+	--acc: #ffe873;
+	--acc-ink: #26374f;
+	--acc-tx: #26374f; /* não é o amarelo: marca-texto não é cor de letra */
+	--caneta: #d9534f;
+	--foco: #26374f;
+	--bw: 2px;
+	--raio: 10px;
+	--sombra: 3px 4px 0 #26374f1f;
+}
+
+/* ---- Caderno escuro — moleskine, não papel invertido.
+   O grifo continua brilhante com texto escuro em cima: um marca-texto de
+   verdade é mancha de luz, não inverte. DESIGN.md §1. ---- */
+[data-skin='caderno'].escuro {
+	--mesa: #171512;
+	--folha: #2b2823;
+	--tinta: #e9e3d6;
+	--mut: #9c9486;
+	--pauta: #403a32;
+	--linha: #4a4339;
+	--acc: #e8c547;
+	--acc-ink: #211f1b;
+	--acc-tx: #e8c547;
+	--caneta: #ff8a80;
+	--foco: #e9e3d6;
+	--bw: 2px;
+	--raio: 10px;
+	--sombra: 3px 4px 0 #00000059;
+}
+
+/* ---- Dev claro — o modo documento, onde a papelada sai ---- */
+[data-skin='dev'] {
+	--mesa: #e4e4e0;
+	--folha: #fafaf8;
+	--tinta: #16191d;
+	--mut: #5c6167;
+	--pauta: #e0e0db;
+	--linha: #d6d6d1;
+	--acc: #ffb454;
+	--acc-ink: #1a1206;
+	--acc-tx: #8a5100; /* o âmbar escurece: #FFB454 sobre papel dá 1,8:1 */
+	--caneta: #b3261e;
+	--foco: #8a5100;
+	--bw: 1px;
+	--raio: 9px;
+	--sombra: 0 1px 2px #16191d14;
+}
+
+/* ---- Dev escuro — onde o instrutor trabalha ---- */
+[data-skin='dev'].escuro {
+	--mesa: #0a0e12;
+	--folha: #141a21;
+	--tinta: #d5dde7;
+	--mut: #8a95a3;
+	--pauta: #232b36;
+	--linha: #232b36;
+	--acc: #ffb454;
+	--acc-ink: #1a1206;
+	--acc-tx: #ffc276;
+	--caneta: #f0716b;
+	--foco: #ffb454;
+	--bw: 1px;
+	--raio: 9px;
+	--sombra: none;
+}

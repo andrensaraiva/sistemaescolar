@@ -156,6 +156,7 @@ a loja de temas. Para o resto está superado — ver [ANALISE-UX.md](ANALISE-UX.
 
 | Doc | O que tem |
 |---|---|
+| **[ESTADO.md](ESTADO.md)** | **Onde a construção parou.** Handoff entre sessões: o que existe, o que está aberto, as armadilhas já pagas. Leia antes de escrever código. |
 | **[SISTEMAS.md](SISTEMAS.md)** | **O mapa do produto completo.** Todos os sistemas, o que cada um faz, status, o que foi cortado e a ordem de construção. Comece por aqui. |
 | [BLUEPRINT.md](BLUEPRINT.md) | Arquitetura, stack, modelo de dados, RLS. ⚠️ O §9 (ordem de construção) foi invertido pela dor central — vale o de [SISTEMAS.md](SISTEMAS.md). |
 | [ANALISE-UX.md](ANALISE-UX.md) | Auditoria crítica que originou as decisões de 15/jul. Leia antes de mexer em design. |
@@ -179,6 +180,11 @@ do curso (para importação de currículo por IA).
 ---
 
 ## 5. Estado — o que ainda está aberto
+
+> **Código:** a **Fase 0 (Fundação) está construída** em [web/](web/) — SvelteKit +
+> Supabase, kit de UI das 4 skins, migration 1 com RLS provada contra 7 ataques,
+> gateway de IA e registros. Falta fechar 1 bug de e2e e implantar.
+> **O detalhe vive em [ESTADO.md](ESTADO.md)** — este parágrafo só aponta pra lá.
 
 **Perfis:** os quatro definidos e **inventariados** (15/jul/2026) — cada PERFIL-*.md tem
 a lista completa do que **tem**, do que **não tem por decisão** (não por falta de tempo)

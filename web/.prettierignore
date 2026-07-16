@@ -1,0 +1,12 @@
+node_modules
+.svelte-kit
+.vercel
+build
+package-lock.json
+
+# Cache do CLI do Supabase — gerado, não nosso.
+supabase/.temp
+
+# Artefato de teste
+test-results
+playwright-report

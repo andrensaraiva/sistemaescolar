@@ -1,0 +1,219 @@
+/* Primitivos — DESIGN.md §5, transcritos do protótipo aprovado
+   (prototipos/celeste-atividade.html, 15/jul). Em caso de dúvida o protótipo manda.
+   Diferença proposital: aqui o movimento sai dos tokens --mov-*, em vez de
+   hard-coded em cada animação — é a pendência do DESIGN.md §7. */
+
+/* ---- A folha: uma página numa mesa, não um card num grid ---- */
+.folha {
+	background: var(--folha);
+	border: var(--bw) solid var(--linha);
+	border-radius: var(--raio);
+	box-shadow: var(--sombra);
+	overflow: hidden;
+}
+
+.folha-in {
+	padding: 30px 34px 26px;
+}
+
+.titulo {
+	font-family: var(--display);
+	font-weight: 700;
+	font-size: var(--t42);
+	line-height: 1.05;
+	text-wrap: balance;
+}
+
+/* ---- O grifo: marca UMA coisa por tela. Dois grifos = nenhum grifo. ---- */
+.grifo {
+	position: relative;
+	z-index: 1;
+	white-space: nowrap;
+}
+.grifo::before {
+	content: '';
+	position: absolute;
+	inset: -1px -7px;
+	background: var(--acc);
+	z-index: -1;
+	transform: scaleX(0);
+	transform-origin: left;
+	border-radius: 3px;
+	animation: pintar var(--mov-grifo) 0.25s forwards;
+}
+@keyframes pintar {
+	to {
+		transform: scaleX(1);
+	}
+}
+
+/* ---- A pauta: a regra-assinatura (DESIGN.md §3).
+   O line-height do código É o passo da pauta; a régua fica logo abaixo da linha
+   de base, como num caderno de verdade. Só onde há conteúdo em grade de 28px —
+   NUNCA no <body>. Na skin Dev não existe: editor não tem pauta. ---- */
+.pauta {
+	position: relative;
+	display: flex;
+	gap: 18px;
+	align-items: flex-start;
+}
+
+.linhas {
+	flex: 1;
+	min-width: 0;
+	overflow-x: auto;
+	font-family: var(--mono);
+	font-size: var(--t145);
+	line-height: var(--passo);
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent 0 var(--regua),
+		var(--pauta) var(--regua) calc(var(--regua) + 1px),
+		transparent calc(var(--regua) + 1px) var(--passo)
+	);
+}
+
+[data-skin='dev'] .linhas {
+	background-image: none;
+	font-size: var(--t135);
+	line-height: 26px;
+}
+
+.l {
+	display: block;
+	height: var(--passo);
+	white-space: pre;
+}
+[data-skin='dev'] .l {
+	height: 26px;
+}
+.l .n {
+	display: inline-block;
+	width: 24px;
+	margin-right: 16px;
+	text-align: right;
+	color: var(--mut);
+	opacity: 0.65;
+	font-size: var(--t12);
+	user-select: none;
+}
+
+/* ---- A caneta: a voz do professor DENTRO do trabalho do aluno. Nunca um modal. ---- */
+.caneta {
+	font-family: var(--display);
+	font-weight: 700;
+	color: var(--caneta);
+	font-size: var(--t21);
+	line-height: 1.15;
+	transform: rotate(-2.5deg);
+}
+.caneta-pousa {
+	animation: escrever var(--mov-caneta) 0.5s both;
+}
+@keyframes escrever {
+	from {
+		opacity: 0;
+		transform: rotate(-9deg) translate(-6px, 5px);
+	}
+	to {
+		opacity: 1;
+		transform: rotate(-2.5deg);
+	}
+}
+
+/* ---- A lua: o conceito celestial aparece discreto — na marca e nas ligas.
+   Nunca como tema espacial. ---- */
+.lua {
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	border: 2px solid currentColor;
+	background: transparent;
+}
+
+.marca {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-family: var(--display);
+	font-size: var(--t26);
+	font-weight: 700;
+	line-height: 1;
+}
+/* No Dev a marca é `~/celeste`: sabor de terminal sem a fantasia. */
+[data-skin='dev'] .marca {
+	font-family: var(--mono);
+	font-size: var(--t14);
+	font-weight: 700;
+}
+
+/* ---- A barra (XP): enche onde o resultado aparece, nunca num painel à parte ---- */
+.barra {
+	display: inline-block;
+	width: 64px;
+	height: 7px;
+	border: 1px solid var(--linha);
+	border-radius: 999px;
+	overflow: hidden;
+}
+.barra .fill {
+	display: block;
+	height: 100%;
+	background: var(--acc);
+	transition: width var(--mov-barra);
+}
+
+/* ---- Botão: âmbar só no que é acionável ---- */
+.btn {
+	padding: 9px 18px;
+	border-radius: calc(var(--raio) - 3px);
+	background: var(--acc);
+	color: var(--acc-ink);
+	border: var(--bw) solid var(--linha);
+	font-size: var(--t135);
+	font-weight: 700;
+	cursor: pointer;
+	transition:
+		transform var(--mov-toque),
+		filter var(--mov-toque);
+}
+.btn:hover {
+	filter: brightness(1.04);
+}
+.btn:active {
+	transform: translateY(1px);
+}
+.btn[disabled] {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.btn-quieto {
+	background: transparent;
+	color: var(--tinta);
+}
+
+/* ---- Os dois eixos: XP e nota lado a lado, SEMPRE com a régua.
+   Número sem régua é ansiedade. CLAUDE.md §2.2 ---- */
+.eixos {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+.eixo {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: var(--t125);
+}
+.regua {
+	color: var(--mut);
+	font-size: var(--t12);
+}
+.sep {
+	width: 1px;
+	height: 18px;
+	background: var(--linha);
+	opacity: 0.5;
+}

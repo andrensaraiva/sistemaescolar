@@ -1,0 +1,119 @@
+/* Base — reset curto, tipografia e foco. Regras: CLAUDE.md §2.12–§2.16, DESIGN.md §2 e §6.
+   As fontes são servidas de /fontes (self-host). Nos protótipos elas iam em base64
+   porque a CSP do artifact bloqueia CDN; aqui o arquivo é melhor: cacheável e menor. */
+
+@font-face {
+	font-family: 'Schibsted Grotesk';
+	src: url('/fontes/schibsted-grotesk.woff2') format('woff2');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Caveat';
+	src: url('/fontes/caveat.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('/fontes/jetbrains-mono.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	/* A troca de skin/modo é uma mudança de estado: ela tem duração. */
+	transition:
+		background-color var(--mov-troca),
+		color var(--mov-troca);
+}
+
+body {
+	margin: 0;
+	background: var(--mesa);
+	color: var(--tinta);
+	font-family: var(--corpo);
+	font-size: var(--t15);
+	line-height: 1.55;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+	margin: 0;
+}
+
+/* Hierarquia por peso e tamanho, em caixa baixa. Zero labels CAPS cinza. */
+h1,
+h2,
+h3 {
+	line-height: 1.2;
+	font-weight: 700;
+}
+
+a {
+	color: var(--acc-tx);
+}
+
+button {
+	font: inherit;
+	color: inherit;
+}
+
+/* Foco: token da skin, nunca cor fixa — âmbar sobre papel dá 1,8:1 e reprova. */
+:focus-visible {
+	outline: 2px solid var(--foco);
+	outline-offset: 2px;
+	border-radius: 3px;
+}
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* Mono só onde número alinha — nunca em nome, título, enunciado ou feedback.
+   DESIGN.md §2. Aplicar via classe, com tabular-nums para número não dançar. */
+.num {
+	font-family: var(--mono);
+	font-variant-numeric: tabular-nums;
+	font-feature-settings: 'tnum' 1;
+}
+
+.mesa-somente-leitor {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Quem pediu menos movimento recebe o ESTADO FINAL, não a tela vazia: a animação
+   roda instantaneamente em vez de ser removida. DESIGN.md §4. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
