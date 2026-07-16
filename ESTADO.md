@@ -4,7 +4,14 @@
 > [SISTEMAS.md](SISTEMAS.md) (o mapa) e [CLAUDE.md](CLAUDE.md) (as leis).
 > Atualize este arquivo ao fim de cada sessão. Se ele mentir, ninguém confia nele.
 
-**Última sessão: 16/jul/2026 (parte 2)** — primeira fatia depois da Fundação:
+**Última sessão: 16/jul/2026 (parte 3)** — segunda fatia: **chamada** (SISTEMAS §17,
+passo 2 — o sensor mais barato do radar). Decisão de domínio: a chamada prende na
+**turma** (não em turma×UC) — entrega o sensor já, sem depender do currículo; o diário
+por UC entra na Papelada. Professor abre uma aula (número automático) → marca
+presente/atraso/falta (todos entram presentes, vira só os ausentes) → persiste. Migration
+3 + RLS **provada com 11 ataques** + 2 telas Dev + 1 e2e. **e2e: 8/8**.
+
+**16/jul/2026 (parte 2)** — primeira fatia depois da Fundação:
 **turmas + código de convite** (SISTEMAS §17, passo 1: "sem gente, nada existe").
 Professor cria turma → gera código de 6 chars → aluno logado entra pelo código →
 professor vê a lista. Migration 2 + RLS **provada com 12 ataques** + 2 telas nas duas
@@ -37,6 +44,9 @@ docs na raiz.
 | Migration 2: `classes` + `class_members` + código de convite | ✅ **provada com 12 ataques** (`rls-turmas.sql`) |
 | Turmas: professor cria/regenera/remove; aluno entra por código | ✅ `/turmas` (Dev + Caderno) + `/turmas/[id]` (dono) |
 | e2e do fluxo de turmas (`turmas.spec.ts`) | ✅ **2/2**: cria → entra por código → aparece na lista; código errado não entra |
+| Migration 3: `attendance_sessions` + `attendance_marks` (chamada) | ✅ **provada com 11 ataques** (`rls-chamada.sql`) |
+| Chamada: abre aula (nº auto), marca presente/atraso/falta, persiste | ✅ `/turmas/[id]/chamada` + `/[sessao]` (Dev) — prende na turma |
+| e2e da chamada (`chamada.spec.ts`) | ✅ **1/1**: abre aula → marca falta → persiste após reload |
 
 ### A prova da RLS — o que aprendemos apanhando
 `web/supabase/tests/rls-perfis.sql` (rode contra o local; instruções no cabeçalho).
@@ -144,6 +154,13 @@ Studio (`npm run db:start` → http://127.0.0.1:54323) ou por SQL:
   bug da skin (§Resolvido nº 1) só aparece no **browser hidratado** em navegação
   client-side. Antes de dar um fluxo por pronto, exercite-o hidratado — foi o que o e2e
   passou a fazer.
+- **`upsert` do supabase precisa de grant de UPDATE em TODAS as colunas do payload**,
+  não só nas que mudam. O PostgREST monta o upsert com `DO UPDATE SET` em todas as
+  colunas enviadas — inclusive a PK —, então `grant update (status)` sozinho dá
+  "permission denied for table" mesmo com a policy certa. O INSERT direto passava; só o
+  upsert falhava. Achado com o e2e da chamada (a marca não salvava). O grant de
+  `attendance_marks` foi ampliado, com comentário na migration 3 explicando por quê.
+  **Regra:** ao usar `.upsert()`, o grant de update tem que cobrir o payload inteiro.
 
 ---
 

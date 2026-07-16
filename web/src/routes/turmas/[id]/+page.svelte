@@ -47,6 +47,11 @@
 		<p class="ok" aria-live="polite">Código atualizado. O anterior parou de funcionar.</p>
 	{/if}
 
+	<nav class="acoes-turma">
+		<a class="acao" href={resolve('/turmas/[id]/chamada', { id: data.turma.id })}>fazer chamada →</a
+		>
+	</nav>
+
 	<h2 class="cabeca-lista">
 		alunos <span class="num tot">{data.alunos.length}</span>
 	</h2>
@@ -136,6 +141,19 @@
 		line-height: 1;
 		letter-spacing: 0.22em;
 		color: var(--tinta);
+	}
+
+	.acoes-turma {
+		margin-top: 20px;
+	}
+	.acao {
+		font-size: var(--t145);
+		font-weight: 700;
+		color: var(--acc-tx);
+		text-decoration: none;
+	}
+	.acao:hover {
+		text-decoration: underline;
 	}
 
 	.cabeca-lista {

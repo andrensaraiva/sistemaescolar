@@ -174,8 +174,17 @@ documento oficial (o QGR só tem `F` e `.`, então atraso é **dado interno**). 
 alimenta o radar: atraso crônico é sintoma precoce, e é de graça registrar. Você **não**
 arbitra relógio na porta — não existe "X minutos vira falta".
 
-**Aberto:** como corrigir chamada de uma semana atrás sem bagunçar o diário (e sem
-quebrar streak retroativamente).
+**Construído (16/jul):** `attendance_sessions` (aula nº/data/período, número automático)
++ `attendance_marks` (presente/atraso/falta, com `registered_by`). **Prende na turma**
+(decisão 16/jul), não em turma×UC — o diário por UC vem na Papelada. Todos entram
+presentes; o professor vira só os ausentes. RLS **provada com 11 ataques**. Telas
+`/turmas/[id]/chamada` (lista de aulas) e `/[sessao]` (marcar). Ainda **não** computa o
+% de frequência nem mostra ao aluno — é a próxima camada. Ver [ESTADO.md](ESTADO.md).
+
+**Aberto:** o **% de frequência** (agregação por aluno, com o corte de 75%) e a vista do
+aluno ("91% · precisa de 75%") · como corrigir chamada de uma semana atrás sem bagunçar o
+diário (e sem quebrar streak retroativamente) · o vínculo com a UC quando o currículo
+existir (re-tag das sessões).
 
 ---
 
