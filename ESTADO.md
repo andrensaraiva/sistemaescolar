@@ -4,8 +4,13 @@
 > [SISTEMAS.md](SISTEMAS.md) (o mapa) e [CLAUDE.md](CLAUDE.md) (as leis).
 > Atualize este arquivo ao fim de cada sessão. Se ele mentir, ninguém confia nele.
 
-**Última sessão: 15/jul/2026** — Fase 0 (Fundação) construída. O código vive em
-[web/](web/); os docs continuam na raiz.
+**Última sessão: 16/jul/2026** — Fase 0 (Fundação) **fecha o e2e**: os 5 testes de
+`entrar.spec.ts` passam de forma confiável (3 execuções seguidas em servidor frio, 5/5
+cada). O bloqueio nº 1 da sessão anterior está resolvido — e resolvê-lo destravou um bug
+real de produto (a skin não trocava em navegação client-side; ver abaixo). O código vive
+em [web/](web/); os docs continuam na raiz.
+
+**Sessão 15/jul/2026** — Fase 0 (Fundação) construída.
 
 ---
 
@@ -21,6 +26,8 @@
 | Seed local (aluno + professor) | ✅ `npm run db:reset` |
 | Gateway de IA + `AiProvider` + `CodeRunner` (stubs) | ✅ com o `runner: nenhum` já real |
 | Registro de features + de tipos de atividade | ✅ testáveis |
+| e2e do fluxo de entrar (`entrar.spec.ts`) | ✅ **5/5, confiável** (3× frio) — a "regra de ouro" da fatia |
+| Skin correta em navegação client-side | ✅ o `<html>` agora sincroniza no cliente (bug achado pelo e2e) |
 
 ### A prova da RLS — o que aprendemos apanhando
 `web/supabase/tests/rls-perfis.sql` (rode contra o local; instruções no cabeçalho).
@@ -37,43 +44,50 @@ verdade: a policy autoriza a *linha* (que é do aluno mesmo), então RLS sozinha
 
 ---
 
-## ⚠️ O que ficou aberto — comece por aqui
+## ✅ Resolvido nesta sessão (16/jul)
 
-### 1. O e2e falha e o motivo não foi achado (o único bloqueio real)
-`web/e2e/entrar.spec.ts`: **1 passa** (o redirect de quem não entrou), **4 falham** —
-o login não completa **no browser**.
+### 1. O e2e do login — era corrida de hidratação, e escondia um bug de produto
+Os 5 testes de `entrar.spec.ts` passam agora, confiável. O diagnóstico da sessão
+anterior estava perto mas a conclusão ("action que lança") estava errada — o servidor
+sempre esteve certo. **O que era, de verdade:**
 
-O que já está descartado, para não refazer:
-- **O servidor está certo.** `curl -X POST localhost:5173/entrar` com o form devolve
-  `{"type":"redirect","status":303,"location":"/"}` **e grava o cookie de sessão**.
-- **O banco está certo.** `POST /auth/v1/token?grant_type=password` devolve 200.
-- **Não é rate limit** do GoTrue: 3 logins seguidos, 3× HTTP 200.
-- **Não é paralelismo**: `--workers=1` falha igual, em ~5s (falha rápida, não timeout).
-- **Não é o seed** (já consertado, ver abaixo).
+- **Causa da flakiness:** em Vite **dev frio**, a hidratação é lenta. O Playwright digita
+  e clica **antes** de o `use:enhance` attachar → o form faz **submit nativo** (sem JS),
+  que é o comportamento correto de progressive enhancement, mas **recarrega a página
+  inteira**. Em dev frio essa navegação estourava os 5s do `expect`. Um usuário humano é
+  lento o bastante para nunca cair nisso; o robô não. **Fix:** `abrirEntrar()` espera
+  `networkidle` (o grafo de módulos do dev terminou) antes de interagir.
+- **O bug real que isso escondia:** com a hidratação esperada, o login do professor
+  passou a ir pra `/` por navegação **client-side** — e aí `data-skin` ficava `caderno`.
+  O `<html>` (skin + modo) só era escrito no **SSR** (`hooks.server.ts`); numa navegação
+  client-side ele não passa mais pelo servidor. **Um professor real logava e continuava
+  na skin Caderno até dar refresh.** A corrida antiga mascarava isso porque o submit
+  nativo fazia full render. **Fix:** `+layout.svelte` sincroniza o `<html>` no cliente
+  via `$effect`, com a mesma verdade (`data.skin`/`data.modo` do `+layout.server.ts`).
+  Na hidratação ele reafirma o que já veio do SSR, sem flash.
 
-**A pista que vale ouro:** um spec de debug com **exatamente os mesmos passos** +
-`waitForTimeout(3000)` **passa** e termina em `/`. O `entrar.spec.ts` não. A diferença
-está no espectro entre "esperar 3s" e o `expect(...).toHaveURL('/')` com 5s de timeout —
-o que não faz sentido ainda, e é justamente aí que a próxima sessão deve cavar.
-Sintoma no snapshot da falha: o campo **e-mail volta vazio** e **nenhum alerta aparece**,
-nem no teste de senha errada — o padrão de uma action que **lança**, em vez de retornar
-`fail(400)`. Suspeita nº 1: o `use:enhance` de `entrar/+page.svelte` engolindo o
-resultado; tente sem `enhance` para isolar.
+**A lição:** um e2e que passa por sorte de timing é pior que um que falha — ele teria
+deixado o bug da skin ir pra produção. A espera de hidratação não é maquiagem: é
+reproduzir o usuário real, e foi ela que revelou o bug.
 
-### 2. `npm run build` não roda no Windows
+---
+
+## ⚠️ O que ainda está aberto
+
+### 1. `npm run build` não roda no Windows
 O `adapter-vercel` cria **symlink**; o Windows recusa (`EPERM`) sem o **Modo de
 Desenvolvedor** ligado. A Vercel builda no Linux, então **produção não é afetada** — mas
 localmente você não consegue buildar. Por isso o Playwright roda contra `npm run dev`
 (porta 5173), não contra `build && preview`. Ligue o Modo de Desenvolvedor se quiser o
 build local de volta.
 
-### 3. Nada foi implantado ainda
+### 2. Nada foi implantado ainda
 Falta (**depende de conta sua, eu não posso fazer**): criar o projeto no Supabase
 (free), criar o projeto na Vercel apontando **Root Directory = `web`**, e pôr as 3 vars
 do `.env.example` lá. Só depois a Fase 0 fecha de verdade ("deploy free tier
 funcionando").
 
-### 4. Você ainda não tem conta de admin
+### 3. Você ainda não tem conta de admin
 Não existe fluxo de admin (é Fase 1, e [PERFIL-ADMIN.md](PERFIL-ADMIN.md) manda no
 desenho — **não inventei uma RPC antes de ler aquele doc**). Por ora, promova pelo
 Studio (`npm run db:start` → http://127.0.0.1:54323) ou por SQL:
@@ -97,6 +111,16 @@ Studio (`npm run db:start` → http://127.0.0.1:54323) ou por SQL:
   Use `begin; ... rollback;` e um `savepoint` por ataque.
 - **4 vulnerabilidades "low"** no `npm audit` são o `cookie` transitivo do SvelteKit.
   `npm audit fix --force` rebaixa o Kit para `0.0.30`. Não faça.
+- **`npm run lint` vermelho no Windows** era CRLF, não estilo. O git com
+  `core.autocrlf=true` (default do Windows) guarda LF no índice mas materializa **CRLF**
+  no working tree; o Prettier, com `endOfLine` default `lf`, reprovava os 37 arquivos.
+  Resolvido com `"endOfLine": "auto"` no `.prettierrc` — passa em CRLF (Windows) e LF
+  (Linux/Vercel) sem reescrever fonte nenhum. (Alternativa mais dura, não usada: um
+  `.gitattributes` com `* text=auto eol=lf` + `git add --renormalize`.)
+- **Testar hidratação, não só o servidor.** Um `curl` na action prova o servidor, mas o
+  bug da skin (§Resolvido nº 1) só aparece no **browser hidratado** em navegação
+  client-side. Antes de dar um fluxo por pronto, exercite-o hidratado — foi o que o e2e
+  passou a fazer.
 
 ---
 
@@ -119,8 +143,11 @@ Studio (`npm run db:start` → http://127.0.0.1:54323) ou por SQL:
 cd web
 npm install
 npm run db:start     # Docker Desktop precisa estar ABERTO
+# .env: copie de .env.example e preencha com o que o db:start imprime
+#   (npx supabase status): API_URL e ANON_KEY. Sem ele o app lança SEM_CONFIG.
 npm run db:reset     # migrations + seed
 npm run dev          # http://localhost:5173
+npm run test:e2e     # 5/5 — sobe o dev server sozinho; precisa do banco no ar
 ```
 
 Contas do seed: `aluno@senai.br` e `prof@senai.br`, senha `celeste123`.
