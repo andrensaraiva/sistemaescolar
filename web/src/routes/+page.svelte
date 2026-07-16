@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { resolve } from '$app/paths';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -14,6 +15,9 @@
 		<p class="marca"><span class="lua"></span>{data.skin === 'dev' ? '~/celeste' : 'Celeste'}</p>
 
 		<div class="dir">
+			<a class="ir-turmas" href={resolve('/turmas')}
+				>{data.skin === 'dev' ? '~/turmas' : 'minhas turmas'}</a
+			>
 			<form method="POST" action="/modo">
 				<input type="hidden" name="modo" value={outroModo} />
 				<input type="hidden" name="voltar" value={page.url.pathname} />
@@ -75,7 +79,17 @@
 	.dir {
 		margin-left: auto;
 		display: flex;
-		gap: 8px;
+		align-items: center;
+		gap: 10px;
+	}
+	.ir-turmas {
+		font-size: var(--t135);
+		color: var(--acc-tx);
+		text-decoration: none;
+		font-weight: 700;
+	}
+	.ir-turmas:hover {
+		text-decoration: underline;
 	}
 	.titulo {
 		margin-bottom: 14px;

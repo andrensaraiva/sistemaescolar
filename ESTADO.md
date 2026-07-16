@@ -4,11 +4,17 @@
 > [SISTEMAS.md](SISTEMAS.md) (o mapa) e [CLAUDE.md](CLAUDE.md) (as leis).
 > Atualize este arquivo ao fim de cada sessão. Se ele mentir, ninguém confia nele.
 
-**Última sessão: 16/jul/2026** — Fase 0 (Fundação) **fecha o e2e**: os 5 testes de
-`entrar.spec.ts` passam de forma confiável (3 execuções seguidas em servidor frio, 5/5
-cada). O bloqueio nº 1 da sessão anterior está resolvido — e resolvê-lo destravou um bug
-real de produto (a skin não trocava em navegação client-side; ver abaixo). O código vive
-em [web/](web/); os docs continuam na raiz.
+**Última sessão: 16/jul/2026 (parte 2)** — primeira fatia depois da Fundação:
+**turmas + código de convite** (SISTEMAS §17, passo 1: "sem gente, nada existe").
+Professor cria turma → gera código de 6 chars → aluno logado entra pelo código →
+professor vê a lista. Migration 2 + RLS **provada com 12 ataques** + 2 telas nas duas
+skins + 2 e2e. `class_units` (turma × UC) fica para quando existir currículo. **e2e:
+7/7** (5 de entrar + 2 de turmas).
+
+**16/jul/2026 (parte 1)** — Fase 0 **fecha o e2e**: `entrar.spec.ts` confiável (3× frio,
+5/5). O bloqueio nº 1 da sessão anterior resolvido — e resolvê-lo destravou um bug real
+(a skin não trocava em navegação client-side; ver §Resolvido). Código em [web/](web/);
+docs na raiz.
 
 **Sessão 15/jul/2026** — Fase 0 (Fundação) construída.
 
@@ -28,6 +34,9 @@ em [web/](web/); os docs continuam na raiz.
 | Registro de features + de tipos de atividade | ✅ testáveis |
 | e2e do fluxo de entrar (`entrar.spec.ts`) | ✅ **5/5, confiável** (3× frio) — a "regra de ouro" da fatia |
 | Skin correta em navegação client-side | ✅ o `<html>` agora sincroniza no cliente (bug achado pelo e2e) |
+| Migration 2: `classes` + `class_members` + código de convite | ✅ **provada com 12 ataques** (`rls-turmas.sql`) |
+| Turmas: professor cria/regenera/remove; aluno entra por código | ✅ `/turmas` (Dev + Caderno) + `/turmas/[id]` (dono) |
+| e2e do fluxo de turmas (`turmas.spec.ts`) | ✅ **2/2**: cria → entra por código → aparece na lista; código errado não entra |
 
 ### A prova da RLS — o que aprendemos apanhando
 `web/supabase/tests/rls-perfis.sql` (rode contra o local; instruções no cabeçalho).
@@ -41,6 +50,20 @@ nome ✅.
 verdade: a policy autoriza a *linha* (que é do aluno mesmo), então RLS sozinha deixaria
 `update profiles set xp=999999 where id=auth.uid()` passar. Quem protege é o
 `grant update (colunas)`. Foi encontrado tentando o ataque, não lendo o código.
+
+### A prova da RLS de turmas — a mesma disciplina, um alvo novo
+`web/supabase/tests/rls-turmas.sql` (12 ataques). A trava-chave da fatia: **a turma não
+é enumerável** — a policy de SELECT só libera dono e membro, então o aluno *não pode ler
+o código* de uma turma para entrar nela. Entrar é por **RPC `SECURITY DEFINER`**
+(`join_class_by_code`), que acha a turma por baixo da RLS, valida (só `role=aluno`,
+normaliza maiúsculas) e insere a filiação. `class_members` **não tem grant de INSERT**
+nenhum: a única porta é a RPC. É o mesmo princípio da migration 1 — a escrita perigosa
+passa por uma porta estreita, não pela tabela aberta.
+
+Consequência de design que vale registrar: o professor precisava **ler o perfil dos
+alunos dele** (a lista da turma pede o nome), e a policy "leio o meu" de `profiles`
+escondia isso. Resolvido com o helper `is_my_student()` + uma policy de SELECT em
+`profiles` — o dono lê quem é seu aluno, e só. Isso vai ser reusado em correção e radar.
 
 ---
 

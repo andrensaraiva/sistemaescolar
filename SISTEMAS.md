@@ -55,8 +55,13 @@ logam) · RLS por funções `SECURITY DEFINER`.
 turma** (você escreve no quadro, a turma entra sozinha na primeira aula — zero trabalho
 seu, e o código é a porta) · ✅ admin é área separada ([PERFIL-ADMIN.md](PERFIL-ADMIN.md)).
 
-**Aberto:** expiração do código · como você confere quem entrou (e quem entrou errado) ·
-o que acontece se um aluno usa o código da turma errada · recuperação de senha de menor.
+**Construído (16/jul):** o código de convite liga um aluno **já existente** a uma turma
+(a conta é criada pela escola — o código não cria conta). Ver §4 e [ESTADO.md](ESTADO.md).
+
+**Aberto:** expiração do código (por ora não expira) · **como as contas de aluno nascem
+em massa** sem cadastro aberto (é do admin, Fase 1 — o `db:reset` semeia à mão hoje) ·
+o que acontece se um aluno usa o código da turma errada (mitigado: o dono remove) ·
+recuperação de senha de menor.
 
 ---
 
@@ -137,8 +142,15 @@ falta** inteira ([PERFIL-COORDENADOR.md §4](PERFIL-COORDENADOR.md)): coordenado
 com prazo que expira sozinho + quebra-vidro registrado e notificado; substituto faz
 chamada e nota **registradas como dele**; handoff de ida **e volta**.
 
+**Construído (16/jul):** `classes` (dono) + `class_members` + **código de convite**
+(6 chars sem ambíguos, sem expirar, regenerável — decisão 16/jul). Entrar é por RPC
+`SECURITY DEFINER` (turma não enumerável); RLS **provada com 12 ataques**. Telas
+`/turmas` (Dev + Caderno) e `/turmas/[id]` (dono: lista, código, regenerar, remover).
+`class_units` **ainda não** — depende de UC (currículo). Ver [ESTADO.md](ESTADO.md).
+
 **Aberto:** co-docência permanente (dois titulares dividindo a UC por opção, não por
-falta) — você mencionou que divide a turma; falta detalhar quem lança o quê.
+falta) — você mencionou que divide a turma; falta detalhar quem lança o quê ·
+expiração/uso do código pela turma errada (mitigado por ora: o dono remove o aluno).
 
 ---
 
